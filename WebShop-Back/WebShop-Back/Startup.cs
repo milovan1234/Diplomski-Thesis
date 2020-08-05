@@ -62,6 +62,9 @@ namespace WebShop_Back
 
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProducerService, ProducerService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ISubCategoryService, SubCategoryService>();
 
 
             services.AddCors(options =>
