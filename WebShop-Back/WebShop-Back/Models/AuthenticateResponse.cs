@@ -11,7 +11,6 @@ namespace WebShop_Back.Models
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
         public UserRole Role { get; set; }
         public string PhoneNumber { get; set; }
         public string Token { get; set; }
@@ -23,6 +22,7 @@ namespace WebShop_Back.Models
             this.Lastname = user.Lastname;
             this.Email = user.Email;
             this.Role = user.Role;
+            this.PhoneNumber = user.PhoneNumber;
             this.Token = token;
         }
     }
