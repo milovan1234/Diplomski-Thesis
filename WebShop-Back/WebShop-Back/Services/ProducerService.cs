@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,6 +36,18 @@ namespace WebShop_Back.Services
         {
             return _context.Producers;
         }
+        public IEnumerable<Producer> GetProducersForSubCategory(int subCategoryId)
+        {
+            List<Producer> producers = new List<Producer>();
+            _context.Products.Include(x => x.Producer).ToList().ForEach(x =>
+            {
+                if(x.SubCategoryId == subCategoryId)
+                {
+                    producers.Add(x.Producer);
+                }
+            });
+            return producers;
+        }
 
         public void UpdateProducer(int id, Producer producer)
         {
@@ -66,6 +79,6 @@ namespace WebShop_Back.Services
         private bool ProducerExist(Producer producer)
         {
             return _context.Producers.Any(x => x.ProducerName == producer.ProducerName);
-        }
+        }        
     }
 }

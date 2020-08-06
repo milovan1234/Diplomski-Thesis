@@ -29,6 +29,13 @@ namespace WebShop_Back.Controllers
             return Ok(_productService.GetProducts());
         }
 
+        [HttpGet("~/api/subcategories/{subCategoryId}/[controller]")]
+        public IActionResult GetProductsForSubCategory(int subCategoryId)
+        {
+            return Ok(_productService.GetProductsForSubCategory(subCategoryId));
+        }
+
+
         [HttpGet("{productId}")]
         public IActionResult GetProduct(int productId)
         {

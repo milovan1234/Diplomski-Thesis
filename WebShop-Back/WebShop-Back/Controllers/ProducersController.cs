@@ -27,6 +27,13 @@ namespace WebShop_Back.Controllers
             return Ok(_producerService.GetProducers());
         }
 
+        [Route("~/api/subcategories/{subCategoryId}/[controller]")]
+        [HttpGet]
+        public IActionResult GetProducersForSubCategory(int subCategoryId)
+        {
+            return Ok(_producerService.GetProducersForSubCategory(subCategoryId));
+        }
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult AddProducer([FromBody] Producer producer)

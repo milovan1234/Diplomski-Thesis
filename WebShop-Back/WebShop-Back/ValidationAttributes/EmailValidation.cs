@@ -10,7 +10,7 @@ namespace WebShop_Back.ValidationAttributes
     public class EmailValidation : ValidationAttribute  
     {
         public override bool IsValid(object value)
-        {
+        {           
             try
             {
                 MailAddress mailValidator = new MailAddress(value.ToString());

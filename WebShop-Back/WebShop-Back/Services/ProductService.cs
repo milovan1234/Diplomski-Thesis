@@ -21,11 +21,13 @@ namespace WebShop_Back.Services
 
         public void CreateProduct(Product product)
         {
-            if(product == null)
+            if (product == null)
             {
                 throw new ArgumentNullException();
             }
-            product.ImagePath = Path.Combine("wwwroot/Images", product.Image.FileName);
+            string image = Path.GetFileNameWithoutExtension(product.Image.FileName);
+            product.ImagePath = Path.Combine("wwwroot/Images", product.Image.FileName)
+                                                                .Replace(image,image + Guid.NewGuid());
             SaveImage(product.Image, product.ImagePath);
 
             _context.Products.Add(product);
@@ -35,6 +37,14 @@ namespace WebShop_Back.Services
         public IEnumerable<Product> GetProducts()
         {
             return _context.Products.Include(x => x.Producer).Include(x => x.SubCategory);
+        }
+
+        public IEnumerable<Product> GetProductsForSubCategory(int subCategoryId)
+        {
+            return _context.Products
+                              .Include(x => x.Producer)
+                              .Include(x => x.SubCategory)
+                              .Where(x => x.SubCategoryId == subCategoryId);
         }
 
         public Product GetProduct(int id)
@@ -69,8 +79,11 @@ namespace WebShop_Back.Services
             }
 
             File.Delete(productInDb.ImagePath);
-            productInDb.ImagePath = Path.Combine("wwwroot/Images", product.Image.FileName);
+            string image = Path.GetFileNameWithoutExtension(product.Image.FileName);
+            productInDb.ImagePath = Path.Combine("wwwroot/Images", product.Image.FileName)
+                                                                .Replace(image, image + Guid.NewGuid());
             SaveImage(product.Image, productInDb.ImagePath);
+
             productInDb.ProducerId = product.ProducerId;
             productInDb.SubCategoryId = product.SubCategoryId;
             productInDb.Price = product.Price;
@@ -89,7 +102,7 @@ namespace WebShop_Back.Services
             {
                 throw new Exception("Product doesn't exist in database.");
             }
-
+            File.Delete(productInDb.ImagePath);
             _context.Products.Remove(productInDb);
             _context.SaveChanges();
         }        

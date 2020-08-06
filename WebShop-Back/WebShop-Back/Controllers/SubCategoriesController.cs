@@ -19,6 +19,7 @@ namespace WebShop_Back.Controllers
         {
             this._subCategoryService = subCategoryService;
         }
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult GetSubCategoriesForCategory([FromRoute] int categoryId)
