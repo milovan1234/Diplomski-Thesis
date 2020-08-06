@@ -107,7 +107,7 @@ namespace WebShop_Back.Services
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
                     new Claim(ClaimTypes.Role, user.Role.RoleName),
                 }),
-                Expires = DateTime.UtcNow.AddSeconds(180),
+                Expires = DateTime.UtcNow.AddSeconds(300),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                                         SecurityAlgorithms.HmacSha256Signature)
             };

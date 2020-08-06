@@ -42,7 +42,7 @@ namespace WebShop_Back.Controllers
             var user = _userService.GetUser(userId);
             if (user == null)
             {
-                return BadRequest();
+                return NotFound();
             }
             return Ok(user);
         }
