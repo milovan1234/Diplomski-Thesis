@@ -10,6 +10,8 @@
     <Compile Remove="Migrations\20200805092507_AddProducersTable.Designer.cs" />
     <Compile Remove="Migrations\20200805092608_AddProducersTable.cs" />
     <Compile Remove="Migrations\20200805092608_AddProducersTable.Designer.cs" />
+    <Compile Remove="Migrations\20200806205300_AddOrdersOrderItemsTables.cs" />
+    <Compile Remove="Migrations\20200806205300_AddOrdersOrderItemsTables.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

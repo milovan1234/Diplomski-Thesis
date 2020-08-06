@@ -36,7 +36,16 @@ namespace WebShop_Back.Services
 
         public IEnumerable<Product> GetProducts()
         {
-            return _context.Products.Include(x => x.Producer).Include(x => x.SubCategory);
+            return _context.Products.Include(x => x.Producer)
+                                    .Include(x => x.SubCategory)
+                                    .Where(x => x.IsActive);
+        }
+
+        public IEnumerable<Product> GetNonActiveProducts()
+        {
+            return _context.Products.Include(x => x.Producer)
+                                    .Include(x => x.SubCategory)
+                                    .Where(x => !x.IsActive);
         }
 
         public IEnumerable<Product> GetProductsForSubCategory(int subCategoryId)
@@ -44,14 +53,21 @@ namespace WebShop_Back.Services
             return _context.Products
                               .Include(x => x.Producer)
                               .Include(x => x.SubCategory)
-                              .Where(x => x.SubCategoryId == subCategoryId);
+                              .Where(x => x.SubCategoryId == subCategoryId && x.IsActive);
         }
 
         public Product GetProduct(int id)
         {
             return _context.Products.Include(x => x.Producer)
                                     .Include(x => x.SubCategory)
-                                    .FirstOrDefault(x => x.Id == id);
+                                    .FirstOrDefault(x => x.Id == id && x.IsActive);
+        }
+
+        public Product GetNonActiveProduct(int id)
+        {
+            return _context.Products.Include(x => x.Producer)
+                                    .Include(x => x.SubCategory)
+                                    .FirstOrDefault(x => x.Id == id && !x.IsActive);
         }
 
         public byte[] GetImageForProduct(int id)
@@ -105,7 +121,19 @@ namespace WebShop_Back.Services
             File.Delete(productInDb.ImagePath);
             _context.Products.Remove(productInDb);
             _context.SaveChanges();
-        }        
+        }
+
+        public void ChangeActivityProduct(int id, bool activity)
+        {
+            var productInDb = _context.Products.FirstOrDefault(x => x.Id == id);
+            if (productInDb == null)
+            {
+                throw new Exception("Product doesn't exist in database.");
+            }
+
+            productInDb.IsActive = activity;
+            _context.SaveChanges();
+        }
 
         private void SaveImage(IFormFile image, string imagePath)
         {

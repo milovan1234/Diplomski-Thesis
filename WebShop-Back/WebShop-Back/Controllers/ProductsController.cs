@@ -23,14 +23,21 @@ namespace WebShop_Back.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public IActionResult GetProducts()
+        public IActionResult GetAllProducts()
         {
             return Ok(_productService.GetProducts());
         }
 
+        [HttpGet("non-active")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetNonActiveProducts()
+        {
+            return Ok(_productService.GetNonActiveProducts());
+        }
+
+
         [HttpGet("~/api/subcategories/{subCategoryId}/[controller]")]
-        public IActionResult GetProductsForSubCategory(int subCategoryId)
+        public IActionResult GetProductsForSubCategory([FromRoute] int subCategoryId)
         {
             return Ok(_productService.GetProductsForSubCategory(subCategoryId));
         }
@@ -41,6 +48,18 @@ namespace WebShop_Back.Controllers
         {
             var product = _productService.GetProduct(productId);
             if(product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
+        }
+
+        [HttpGet("non-active/{productId}")]
+        public IActionResult GetNonActiveProduct(int productId)
+        {
+            var product = _productService.GetNonActiveProduct(productId);
+            if (product == null)
             {
                 return NotFound();
             }
@@ -82,6 +101,21 @@ namespace WebShop_Back.Controllers
             try
             {
                 _productService.UpdateProduct(productId, product);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("{productId}/activity")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult ChangeActivityProduct([FromRoute] int productId,[FromForm] bool activity)
+        {
+            try
+            {
+                _productService.ChangeActivityProduct(productId, activity);
                 return Ok();
             }
             catch (Exception ex)
