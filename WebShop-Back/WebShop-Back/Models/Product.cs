@@ -27,7 +27,7 @@ namespace WebShop_Back.Models
         [Required]
         public double Price { get; set; }
 
-        [DiscountValidation]
+        [DiscountValidation(ErrorMessage = "Discount value is invalid.")]
         public int Discount { get; set; }
 
         [Required]

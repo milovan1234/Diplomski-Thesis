@@ -13,7 +13,7 @@ namespace WebShop_Back.Models
         public int Id { get; set; }
 
         [Required]
-        [CategoryNameValidation]
+        [CategoryNameValidation(ErrorMessage = "Subcategory name is invalid.")]
         public string SubCategoryName { get; set; }
 
         public Category Category { get; set; }

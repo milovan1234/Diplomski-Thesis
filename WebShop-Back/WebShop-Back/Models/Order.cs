@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WebShop_Back.ValidationAttributes;
 
 namespace WebShop_Back.Models
 {
@@ -16,6 +17,18 @@ namespace WebShop_Back.Models
         public int UserId { get; set; }
 
         [Required]
+        [AddressValidation(ErrorMessage = "City name is invalid.")]
+        public string City { get; set; }
+
+        [Required]
+        [AddressValidation(ErrorMessage = "Street name is invalid.")]
+        public string Street { get; set; }
+
+        [Required]
+        [HouseNumberValidation(ErrorMessage = "House number is invalid.")]
+        public string HouseNumber { get; set; }
+
+        [Required]
         public DateTime DateTimeIssue { get; set; }
 
         [Required]
@@ -23,5 +36,6 @@ namespace WebShop_Back.Models
 
         [Required]
         public double TotalPriceDiscount { get; set; }
+
     }
 }

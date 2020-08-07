@@ -13,7 +13,7 @@ namespace WebShop_Back.Models
         public int Id { get; set; }
 
         [Required]
-        [CategoryNameValidation]
+        [CategoryNameValidation(ErrorMessage = "Category name is invalid.")]
         public string CategoryName { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace WebShop_Back.Models
         public int Id { get; set; }
 
         [Required]
-        [ProducerNameValidation]
+        [ProducerNameValidation(ErrorMessage = "Producer name is invalid.")]
         public string ProducerName { get; set; }
     }
 }

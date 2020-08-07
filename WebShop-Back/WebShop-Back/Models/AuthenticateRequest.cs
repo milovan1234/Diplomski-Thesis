@@ -10,11 +10,11 @@ namespace WebShop_Back.Models
     public class AuthenticateRequest
     {
         [Required]
-        [EmailValidation]
+        [EmailValidation(ErrorMessage = "Email is invalid.")]
         public string Email { get; set; }
 
         [Required]
-        [PasswordValidation]
+        [PasswordValidation(ErrorMessage = "Password is invalid.")]
         public string Password { get; set; }
     }
 }
