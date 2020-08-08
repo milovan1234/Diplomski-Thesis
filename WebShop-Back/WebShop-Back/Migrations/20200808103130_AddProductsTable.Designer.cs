@@ -9,7 +9,7 @@ using WebShop_Back.DbContexts;
 namespace WebShop_Back.Migrations
 {
     [DbContext(typeof(WebShopContext))]
-    [Migration("20200806081240_AddProductsTable")]
+    [Migration("20200808103130_AddProductsTable")]
     partial class AddProductsTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

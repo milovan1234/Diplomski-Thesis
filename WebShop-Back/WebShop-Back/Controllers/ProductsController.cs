@@ -28,11 +28,11 @@ namespace WebShop_Back.Controllers
             return Ok(_productService.GetProducts());
         }
 
-        [HttpGet("non-active")]
+        [HttpGet("~/api/deleted-products")]
         [Authorize(Roles = "Admin")]
-        public IActionResult GetNonActiveProducts()
+        public IActionResult GetDeletedProducts()
         {
-            return Ok(_productService.GetNonActiveProducts());
+            return Ok(_productService.GetDeletedProducts());
         }
 
 
@@ -44,7 +44,7 @@ namespace WebShop_Back.Controllers
 
 
         [HttpGet("{productId}")]
-        public IActionResult GetProduct(int productId)
+        public IActionResult GetProduct([FromRoute] int productId)
         {
             var product = _productService.GetProduct(productId);
             if(product == null)
@@ -55,10 +55,11 @@ namespace WebShop_Back.Controllers
             return Ok(product);
         }
 
-        [HttpGet("non-active/{productId}")]
-        public IActionResult GetNonActiveProduct(int productId)
+        [HttpGet("~/api/deleted-products/{productId}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetDeletedProduct([FromRoute] int productId)
         {
-            var product = _productService.GetNonActiveProduct(productId);
+            var product = _productService.GetDeletedProduct(productId);
             if (product == null)
             {
                 return NotFound();
@@ -68,7 +69,7 @@ namespace WebShop_Back.Controllers
         }
 
         [HttpGet("{productId}/photo")]
-        public IActionResult GetImageForProduct(int productId)
+        public IActionResult GetImageForProduct([FromRoute] int productId)
         {
             var image = _productService.GetImageForProduct(productId);
             if (image == null)
@@ -109,13 +110,13 @@ namespace WebShop_Back.Controllers
             }
         }
 
-        [HttpPut("{productId}/activity")]
+        [HttpPut("~/api/deleted-products/{productId}")]
         [Authorize(Roles = "Admin")]
-        public IActionResult ChangeActivityProduct([FromRoute] int productId,[FromForm] bool activity)
+        public IActionResult RestoreDeletedProduct([FromRoute] int productId)
         {
             try
             {
-                _productService.ChangeActivityProduct(productId, activity);
+                _productService.RestoreDeletedProduct(productId);
                 return Ok();
             }
             catch (Exception ex)

@@ -37,5 +37,6 @@ namespace WebShop_Back.Models
         [Required]
         public double TotalPriceDiscount { get; set; }
 
+        public List<OrderItem> OrderItems { get; set; }
     }
 }

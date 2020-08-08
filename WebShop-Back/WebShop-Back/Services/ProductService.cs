@@ -29,6 +29,7 @@ namespace WebShop_Back.Services
             product.ImagePath = Path.Combine("wwwroot/Images", product.Image.FileName)
                                                                 .Replace(image,image + Guid.NewGuid());
             SaveImage(product.Image, product.ImagePath);
+            product.IsActive = true;
 
             _context.Products.Add(product);
             _context.SaveChanges();
@@ -41,7 +42,7 @@ namespace WebShop_Back.Services
                                     .Where(x => x.IsActive);
         }
 
-        public IEnumerable<Product> GetNonActiveProducts()
+        public IEnumerable<Product> GetDeletedProducts()
         {
             return _context.Products.Include(x => x.Producer)
                                     .Include(x => x.SubCategory)
@@ -63,7 +64,7 @@ namespace WebShop_Back.Services
                                     .FirstOrDefault(x => x.Id == id && x.IsActive);
         }
 
-        public Product GetNonActiveProduct(int id)
+        public Product GetDeletedProduct(int id)
         {
             return _context.Products.Include(x => x.Producer)
                                     .Include(x => x.SubCategory)
@@ -104,10 +105,21 @@ namespace WebShop_Back.Services
             productInDb.SubCategoryId = product.SubCategoryId;
             productInDb.Price = product.Price;
             productInDb.Discount = product.Discount;
-            productInDb.IsActive = product.IsActive;
             productInDb.Stock = product.Stock;
             productInDb.Description = product.Description;
 
+            _context.SaveChanges();
+        }
+        
+        public void RestoreDeletedProduct(int id)
+        {
+            var productInDb = _context.Products.FirstOrDefault(x => x.Id == id && !x.IsActive);
+            if (productInDb == null )
+            {
+                throw new Exception("Product doesn't exist in database.");
+            }
+
+            productInDb.IsActive = true;
             _context.SaveChanges();
         }
 
@@ -118,20 +130,8 @@ namespace WebShop_Back.Services
             {
                 throw new Exception("Product doesn't exist in database.");
             }
-            File.Delete(productInDb.ImagePath);
-            _context.Products.Remove(productInDb);
-            _context.SaveChanges();
-        }
 
-        public void ChangeActivityProduct(int id, bool activity)
-        {
-            var productInDb = _context.Products.FirstOrDefault(x => x.Id == id);
-            if (productInDb == null)
-            {
-                throw new Exception("Product doesn't exist in database.");
-            }
-
-            productInDb.IsActive = activity;
+            productInDb.IsActive = false;
             _context.SaveChanges();
         }
 

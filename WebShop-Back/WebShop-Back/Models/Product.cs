@@ -36,7 +36,6 @@ namespace WebShop_Back.Models
         [Required]
         public string Description { get; set; }
 
-        [Required]
         [Column("Active")]
         public bool IsActive { get; set; }
 
