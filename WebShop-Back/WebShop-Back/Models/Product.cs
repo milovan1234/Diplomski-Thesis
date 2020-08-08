@@ -25,12 +25,14 @@ namespace WebShop_Back.Models
         public int SubCategoryId { get; set; }
 
         [Required]
+        [PriceValidation(ErrorMessage = "Price value is invalid.")]
         public double Price { get; set; }
 
         [DiscountValidation(ErrorMessage = "Discount value is invalid.")]
         public int Discount { get; set; }
 
         [Required]
+        [StockValidation(ErrorMessage = "Stock value is invalid.")]
         public int Stock { get; set; }
 
         [Required]

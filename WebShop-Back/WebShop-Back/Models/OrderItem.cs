@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WebShop_Back.ValidationAttributes;
 
 namespace WebShop_Back.Models
 {
@@ -20,6 +21,7 @@ namespace WebShop_Back.Models
         public int ProductId { get; set; }       
 
         [Required]
+        [QuantityValidation(ErrorMessage = "Quantity value is invalid.")]
         public int Quantity { get; set; }
     }
 }

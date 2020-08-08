@@ -28,13 +28,14 @@ namespace WebShop_Back.Models
         [HouseNumberValidation(ErrorMessage = "House number is invalid.")]
         public string HouseNumber { get; set; }
 
-        [Required]
         public DateTime DateTimeIssue { get; set; }
 
         [Required]
+        [PriceValidation(ErrorMessage = "Total price value is invalid.")]
         public double TotalPrice { get; set; }
 
         [Required]
+        [PriceValidation(ErrorMessage = "Total price with discount value is invalid.")]
         public double TotalPriceDiscount { get; set; }
 
         public List<OrderItem> OrderItems { get; set; }
