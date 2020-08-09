@@ -98,6 +98,21 @@ namespace WebShop_Back.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("WebShop_Back.Models.Proba", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Probas");
+                });
+
             modelBuilder.Entity("WebShop_Back.Models.Producer", b =>
                 {
                     b.Property<int>("Id")

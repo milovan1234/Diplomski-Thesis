@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShop_Back.ValidationAttributes;
@@ -38,6 +39,7 @@ namespace WebShop_Back.Models
         [PriceValidation(ErrorMessage = "Total price with discount value is invalid.")]
         public double TotalPriceDiscount { get; set; }
 
+        [Required]
         public List<OrderItem> OrderItems { get; set; }
     }
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            font-family: Verdana;
+        }
+
+        .personal {
+            color: #343a40;
+            margin-bottom: 40px;
+        }
+
+        .personal span {
+            font-weight: bold;
+        }
+        table {
+            width: 100%; 
+            color: #343a40; 
+            border-collapse: collapse;
+            border: 1px solid #868e96;
+        }
+        .first-row {
+            background-color: #868e96; 
+            text-align: left;
+            font-weight: bold; 
+            padding: 10px;
+        }
+        td, th {
+            padding: 15px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <br><br>
+    <div style="float: left;">
+        <h1 style="color: #343a40; margin-top: 0px; margin-bottom: 0px;">MS Tech</h1>
+        <div style="margin-top: 5px;"></p>Beranska 51b, Beograd</div>
+        <div style="margin-top: 5px;">mstech@gmail.com</div>        
+        <div style="margin-top: 5px;">+381 62 872-7076</div>   
+    </div>
+    <div style="color: #343a40; text-align: left; width: 300px; margin-bottom: 50px; float: right;">
+        <h1 style="color: #343a40; margin-top: 0px; margin-bottom: 0px;">Račun</h1>
+        <div style="margin-top: 5px;"></p><span style="font-weight: bold;">Broj računa: </span>{{num_order}}</div>
+        <div style="margin-top: 5px;"><span style="font-weight: bold;">Datum slanja: </span>{{date_order}}</div>        
+        <div style="margin-top: 5px;"><span style="font-weight: bold;">Datum preuzimanja: </span>{{date_order_rec}}</div>   
+    </div>
+    <div style="clear: both;">
+        <div class="personal" style="color: #343a40; margin-bottom:70px; width: 350px; border: 1px solid #868e96; float: left;">
+            <p style="padding: 10px; background-color: #868e96; margin-top: 0px; font-weight: bold;">Primalac</p>
+            <div style="padding-left: 10px; margin-top: 7px;"><span>Ime i prezime: </span>{{name}}</div>
+            <div style="padding-left: 10px; margin-top: 7px;"><span>Adresa: </span>{{address}}</div>
+            <div style="padding-left: 10px; margin-top: 7px;"><span>Email: </span>{{email}}</div>
+            <div style="padding-left: 10px; margin-top: 7px; margin-bottom: 15px;"><span>Tel: </span>{{tel}}</div>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr class="first-row">
+                <th style="width: 15%;">
+                    Id proizvoda
+                </th>
+                <th style="width: 25%;">
+                    Opis
+                </th>
+                <th style="width: 20%; text-align: center;">
+                    Proizvodjač
+                </th>
+                <th style="width: 10%; text-align: center;">
+                    Količina
+                </th>
+                <th style="width: 15%; text-align: center;">
+                    Popust(%)
+                </th>
+                <th style="width: 15%; text-align: right;">
+                    Cena(RSD)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{order_items}}
+        </tbody>
+    </table>
+    <div style="width: 350px; padding: 10px;  margin-top: 40px; border: 1px solid #868e96; color: #343a40; margin-left:auto; margin-right:0;">
+        <p><span style="font-weight: bold;">Bez popusta:</span> {{total_without_disc}}</p>
+        <p><span style="font-weight: bold;">Popust:</span> {{discount}}</p>
+        <p><span style="font-weight: bold;">Ukupno:</span> {{total}}</p>
+    </div>
+    <h1 style="color: #343a40; text-align: center; margin-top: 70px;">Hvala na poverenju!</h1>
+</body>
+</html>
