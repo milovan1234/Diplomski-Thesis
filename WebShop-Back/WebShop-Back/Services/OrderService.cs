@@ -24,7 +24,20 @@ namespace WebShop_Back.Services
 
             order.OrderItems.ToList().ForEach(x =>
             {
-                _context.Products.FirstOrDefault(y => y.Id == x.ProductId).Stock -= x.Quantity;
+                var productInDb = _context.Products.FirstOrDefault(y => y.Id == x.ProductId && y.IsActive);
+                if (productInDb == null)
+                {
+                    throw new Exception("Product(Id=" + x.ProductId + ") doesn't exist in database.");
+                }
+
+                int newStock = productInDb.Stock - x.Quantity;
+                if(newStock < 0)
+                {
+                    throw new Exception("Quantity cannot be greater than stock.");
+                }
+                productInDb.Stock = newStock;
+                order.TotalPrice += productInDb.Price * x.Quantity;
+                order.TotalPriceDiscount += (productInDb.Price - (productInDb.Price * (productInDb.Discount/100.0))) * x.Quantity;
             });
             order.DateTimeIssue = DateTime.Now;
             _context.Orders.Add(order);
