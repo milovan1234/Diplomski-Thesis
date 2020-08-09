@@ -14,6 +14,8 @@
     <Compile Remove="Migrations\20200806205300_AddOrdersOrderItemsTables.Designer.cs" />
     <Compile Remove="Migrations\20200808100232_AddProductsTable.cs" />
     <Compile Remove="Migrations\20200808100232_AddProductsTable.Designer.cs" />
+    <Compile Remove="Migrations\20200809193453_Proba.cs" />
+    <Compile Remove="Migrations\20200809193453_Proba.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

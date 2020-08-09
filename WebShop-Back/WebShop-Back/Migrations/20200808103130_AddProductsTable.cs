@@ -19,7 +19,7 @@ namespace WebShop_Back.Migrations
                     Stock = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     Active = table.Column<bool>(nullable: false),
-                    ImagePath = table.Column<string>(nullable: false)
+                    ImagePath = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

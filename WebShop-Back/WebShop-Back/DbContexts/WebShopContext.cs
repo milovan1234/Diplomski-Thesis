@@ -12,6 +12,12 @@ namespace WebShop_Back.DbContexts
         public WebShopContext(DbContextOptions<WebShopContext> options) : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
+                .Property(b => b.ImagePath)
+                .IsRequired();
+        }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Producer> Producers { get; set; }
