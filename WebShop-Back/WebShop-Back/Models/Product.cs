@@ -41,7 +41,6 @@ namespace WebShop_Back.Models
         public bool IsActive { get; set; }
 
         [NotMapped]
-        [Required]
         [System.Text.Json.Serialization.JsonIgnore]
         public IFormFile Image { get; set; }
 

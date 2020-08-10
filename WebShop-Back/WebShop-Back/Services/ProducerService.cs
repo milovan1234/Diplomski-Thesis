@@ -56,11 +56,16 @@ namespace WebShop_Back.Services
                 throw new ArgumentNullException();
             }
 
+            if (ProducerExist(producer) && id != _context.Producers.FirstOrDefault(x => x.ProducerName == producer.ProducerName).Id)
+            {
+                throw new Exception("Producer with this name already exist in database.");
+            }
+
             var producerInDb = _context.Producers.FirstOrDefault(x => x.Id == id);
             if(producerInDb == null)
             {
                 throw new Exception("Producer doesn't exist in database.");
-            }
+            }            
 
             producerInDb.ProducerName = producer.ProducerName;
             _context.SaveChanges();
@@ -78,7 +83,7 @@ namespace WebShop_Back.Services
 
         private bool ProducerExist(Producer producer)
         {
-            return _context.Producers.Any(x => x.ProducerName == producer.ProducerName);
+            return _context.Producers.Any(x => x.ProducerName.ToLower() == producer.ProducerName.ToLower());
         }        
     }
 }

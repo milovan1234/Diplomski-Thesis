@@ -95,11 +95,14 @@ namespace WebShop_Back.Services
                 throw new Exception("Product doesn't exist in database.");
             }
 
-            File.Delete(productInDb.ImagePath);
-            string image = Path.GetFileNameWithoutExtension(product.Image.FileName);
-            productInDb.ImagePath = Path.Combine("wwwroot/Images", product.Image.FileName)
-                                                                .Replace(image, image + Guid.NewGuid());
-            SaveImage(product.Image, productInDb.ImagePath);
+            if (product.Image != null)
+            {
+                File.Delete(productInDb.ImagePath);
+                string image = Path.GetFileNameWithoutExtension(product.Image.FileName);
+                productInDb.ImagePath = Path.Combine("wwwroot/Images", product.Image.FileName)
+                                                                    .Replace(image, image + Guid.NewGuid());
+                SaveImage(product.Image, productInDb.ImagePath);
+            }
 
             productInDb.ProducerId = product.ProducerId;
             productInDb.SubCategoryId = product.SubCategoryId;
