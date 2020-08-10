@@ -48,7 +48,7 @@ namespace WebShop_Back.Services
                 productInDb.Stock = newStock;
 
                 order.TotalPrice += productInDb.Price * x.Quantity;
-                order.TotalPriceDiscount += (productInDb.Price - (productInDb.Price * (productInDb.Discount/100.0))) * x.Quantity;
+                order.TotalPriceDiscount += (productInDb.Price - Math.Round(productInDb.Price * (productInDb.Discount / 100.0), 0)) * x.Quantity;
             });
             order.DateTimeIssue = DateTime.Now;
             _context.Orders.Add(order);
