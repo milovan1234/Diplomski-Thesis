@@ -45,5 +45,8 @@ namespace WebShop_Back.Models
         public IFormFile Image { get; set; }
 
         public string ImagePath { get; set; }
+
+        [NotMapped]
+        public byte[] ImageFile { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace WebShop_Back.Services
 {
     public interface ISubCategoryService
     {
+        IEnumerable<SubCategory> GetSubCategories();
         IEnumerable<SubCategory> GetSubCategoriesForCategory(int categoryId);
     }
 }

@@ -10,7 +10,7 @@ using WebShop_Back.Services;
 
 namespace WebShop_Back.Controllers
 {
-    [Route("api/categories/{categoryId}/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class SubCategoriesController : ControllerBase
     {
@@ -21,6 +21,13 @@ namespace WebShop_Back.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public IActionResult GetSubCategories()
+        {
+            return Ok(_subCategoryService.GetSubCategories());
+        }
+
+        [HttpGet("~/api/categories/{categoryId}/[controller]")]
         [AllowAnonymous]
         public IActionResult GetSubCategoriesForCategory([FromRoute] int categoryId)
         {

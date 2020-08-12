@@ -21,6 +21,11 @@ namespace WebShop_Back.Services
             return _context.SubCategories.Include(x => x.Category).Where(x => x.CategoryId == categoryId);
         }
 
+        public IEnumerable<SubCategory> GetSubCategories()
+        {
+            return _context.SubCategories.Include(x => x.Category);
+        }
+
         private bool SubCategoryExist(SubCategory subCategory)
         {
             return _context.SubCategories.Any(x => x.SubCategoryName == subCategory.SubCategoryName);

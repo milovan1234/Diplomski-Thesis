@@ -68,18 +68,6 @@ namespace WebShop_Back.Controllers
             return Ok(product);
         }
 
-        [HttpGet("{productId}/photo")]
-        public IActionResult GetImageForProduct([FromRoute] int productId)
-        {
-            var image = _productService.GetImageForProduct(productId);
-            if (image == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(File(image,"image/*"));
-        }
-
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult CreateProduct([FromForm] Product product)

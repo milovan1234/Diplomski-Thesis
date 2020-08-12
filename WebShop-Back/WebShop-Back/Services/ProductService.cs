@@ -37,49 +37,70 @@ namespace WebShop_Back.Services
 
         public IEnumerable<Product> GetProducts()
         {
-            return _context.Products.Include(x => x.Producer)
+            var products = _context.Products.Include(x => x.Producer)
                                     .Include(x => x.SubCategory)
-                                    .Where(x => x.IsActive);
+                                    .Where(x => x.IsActive).ToList();
+            products.ForEach(x =>
+            {
+                x.ImageFile = GetImageForProduct(x.Id);
+            });
+            return products;
         }
 
         public IEnumerable<Product> GetDeletedProducts()
         {
-            return _context.Products.Include(x => x.Producer)
+            var products = _context.Products.Include(x => x.Producer)
                                     .Include(x => x.SubCategory)
-                                    .Where(x => !x.IsActive);
+                                    .Where(x => !x.IsActive).ToList();
+            products.ForEach(x =>
+            {
+                x.ImageFile = GetImageForProduct(x.Id);
+            });
+            return products;
         }
 
         public IEnumerable<Product> GetProductsForSubCategory(int subCategoryId)
         {
-            return _context.Products
+            var products = _context.Products
                               .Include(x => x.Producer)
                               .Include(x => x.SubCategory)
-                              .Where(x => x.SubCategoryId == subCategoryId && x.IsActive);
+                              .Where(x => x.SubCategoryId == subCategoryId && x.IsActive).ToList();
+            products.ForEach(x =>
+            {
+                x.ImageFile = GetImageForProduct(x.Id);
+            });
+            return products;
         }
 
         public Product GetProduct(int id)
         {
-            return _context.Products.Include(x => x.Producer)
+            var product = _context.Products.Include(x => x.Producer)
                                     .Include(x => x.SubCategory)
                                     .FirstOrDefault(x => x.Id == id && x.IsActive);
-        }
-
-        public Product GetDeletedProduct(int id)
-        {
-            return _context.Products.Include(x => x.Producer)
-                                    .Include(x => x.SubCategory)
-                                    .FirstOrDefault(x => x.Id == id && !x.IsActive);
-        }
-
-        public byte[] GetImageForProduct(int id)
-        {
-            var product = _context.Products.FirstOrDefault(x => x.Id == id);
             if(product == null)
             {
                 return null;
             }
+            product.ImageFile = GetImageForProduct(product.Id);
+            return product;
+        }
 
-            return File.ReadAllBytes(product.ImagePath);
+        public Product GetDeletedProduct(int id)
+        {
+            var product = _context.Products.Include(x => x.Producer)
+                                     .Include(x => x.SubCategory)
+                                     .FirstOrDefault(x => x.Id == id && !x.IsActive);
+            if (product == null)
+            {
+                return null;
+            }
+            product.ImageFile = GetImageForProduct(product.Id);
+            return product;
+        }
+
+        public byte[] GetImageForProduct(int id)
+        {
+            return File.ReadAllBytes(_context.Products.FirstOrDefault(x => x.Id == id).ImagePath);
         }
 
         public void UpdateProduct(int id, Product product)
