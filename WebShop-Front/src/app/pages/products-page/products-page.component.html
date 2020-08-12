@@ -1,9 +1,20 @@
 <div class="container">
     <div class="my-3">
         <small class="text-secondary">
-            <span class="px-3">Početna</span> /
-            <span class="px-3">{{categoryName}}</span> /
-            <span class="font-weight-bold px-3 text-logo">{{subCategoryName}}</span>
+            <a [routerLink]="['/home']" class="px-3 text-secondary text-decoration-none">Početna</a> 
+
+            <i class="fas fa-caret-right"></i>
+
+            <a [routerLink]="['/', categoryName | lowercase | replace:' ':'-']"
+                class="px-3 text-secondary text-decoration-none">{{categoryName}}</a> 
+                
+                <i class="fas fa-caret-right"></i>
+                
+            <a [routerLink]="['/', categoryName | lowercase | replace:' ':'-', subCategoryName | lowercase | replace:' ':'-']"
+                class="font-weight-bold px-3 text-logo text-decoration-none">{{subCategoryName}}</a>
         </small>
     </div>
+    <!-- <div class="my-3" *ngFor="let product of products">
+        <img [src]="product.imageFile" alt="Slika">
+    </div> -->
 </div>
