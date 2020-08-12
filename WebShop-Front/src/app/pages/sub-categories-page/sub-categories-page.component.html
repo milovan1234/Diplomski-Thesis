@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="my-3">
+        <small class="text-secondary">
+            <span class="px-3">Početna</span> /
+            <span class="font-weight-bold px-3 text-logo">{{categoryName}}</span>
+        </small>
+    </div>
+    <div class="row my-4 px-3 px-md-0">
+        <a href="#" class="text-dark text-decoration-none col-md-3 mx-md-2 my-2 border px-5 py-3 text-center"
+            *ngFor="let subCategory of subCategories"
+            [routerLink]="[subCategory.subCategoryName | lowercase | replace:' ':'-']">
+            {{subCategory.subCategoryName}} <i class="fas fa-angle-right"></i>
+        </a>
+    </div>
+</div>

@@ -3,14 +3,33 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductsPageComponent } from './pages/products-page/products-page.component';
+import { RouterModule } from '@angular/router';
+import { ReplacePipe } from './replace.pipe';
+import { SubCategoriesPageComponent } from './pages/sub-categories-page/sub-categories-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    ProductsPageComponent,
+    ReplacePipe,
+    SubCategoriesPageComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot([
+      { path: 'home', component: HomePageComponent, pathMatch: 'full' },
+      { path: ':categoryName', component: SubCategoriesPageComponent, pathMatch: 'full' },
+      { path: ':categoryName/:subCategoryName', component: ProductsPageComponent, pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
+    ]),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

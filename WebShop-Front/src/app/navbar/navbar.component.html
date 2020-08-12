@@ -1,0 +1,94 @@
+<div class="d-none d-md-block">
+    <div class="row bg-light m-0">
+        <div class="col-sm-3 text-center align-self-center">
+            <img src="../../assets/images/logo.png" alt="Logo" class="img-fluid" width="100" height="100">
+        </div>
+        <div class="col-sm-6 text-center align-self-center py-3">
+            <div class="input-group px-5">
+                <input type="search" class="form-control" placeholder="Pretraga">
+                <div class="input-group-append">
+                    <button class="btn text-light bg-logo" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 text-center align-self-center py-3">
+            <div *ngIf="userService.isLogin then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <div class="dropdown d-inline-block">
+                    <button class="btn bg-logo text-light mx-2 py-2 px-3" type="button" id="dropdownUserButton">
+                        <i class="far fa-user"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownUserButton">
+                        <p class="dropdown-item d-inline">Ime Prezime</p>
+                        <a class="dropdown-item" href="#">Moj nalog</a>
+                        <a class="dropdown-item" href="#">Odjavi se</a>
+                    </div>
+                </div>
+                <button type="button" class="btn bg-logo text-light mx-2 py-2 px-3" data-toggle="tooltip"
+                    data-placement="top" title="Moja korpa"><i class="fas fa-shopping-cart"></i></button>
+            </ng-template>
+            <ng-template #elseBlock>
+                <div class="dropdown d-inline-block">
+                    <button class="btn bg-logo text-light mx-2 py-2 px-3" type="button" id="dropdownUserButton">
+                        <i class="far fa-user"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownUserButton">
+                        <a class="dropdown-item" href="#">Prijavi se</a>
+                        <a class="dropdown-item" href="#">Registruj se</a>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-expand-md navbar-dark bg-logo">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="d-inline-block d-md-none">
+        <div *ngIf="userService.isLogin then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+            <div class="dropdown d-inline-block">
+                <button class="btn bg-logo text-light mx-2 py-2 px-3" type="button" id="dropdownUserButton">
+                    <i class="far fa-user"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownUserButton">
+                    <p class="dropdown-item d-inline">Ime Prezime</p>
+                    <a class="dropdown-item" href="#">Moj nalog</a>
+                    <a class="dropdown-item" href="#">Odjavi se</a>
+                </div>
+            </div>
+            <button type="button" class="btn bg-logo text-light mx-2 py-2 px-3" data-toggle="tooltip"
+                data-placement="top" title="Moja korpa"><i class="fas fa-shopping-cart"></i></button>
+        </ng-template>
+        <ng-template #elseBlock>
+            <div class="dropdown d-inline-block">
+                <button class="btn bg-logo text-light mx-2 py-2 px-3" type="button" id="dropdownUserButton">
+                    <i class="far fa-user"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownUserButton">
+                    <a class="dropdown-item" href="#">Prijavi se</a>
+                    <a class="dropdown-item" href="#">Registruj se</a>
+                </div>
+            </div>
+        </ng-template>
+        <img src="../../assets/images/logo-light.png" alt="Logo" class="img-fluid" width="60" height="60">
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav pl-md-5">
+            <li class="nav-item px-2">
+                <a class="nav-link text-light"
+                    [routerLink]="['/']">Početna</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav" *ngFor="let category of categories">
+            <li class="nav-item px-2">
+                <a class="nav-link text-light"
+                    [routerLink]="['/', category.categoryName | lowercase | replace:' ':'-']">{{ category.categoryName }}</a>
+            </li>
+        </ul>
+    </div>
+</nav>
