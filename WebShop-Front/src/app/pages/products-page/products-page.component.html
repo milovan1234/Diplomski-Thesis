@@ -1,4 +1,5 @@
 <div class="container">
+
     <div class="my-3">
         <small class="text-secondary">
             <a [routerLink]="['/home']" class="pr-3 text-secondary text-decoration-none">Početna</a>
@@ -14,14 +15,18 @@
                 class="font-weight-bold px-3 text-logo text-decoration-none">{{subCategoryName | titlecase}}</a>
         </small>
     </div>
+
     <div class="my-4">
         <div class="row">
             <div class="col-md-3 mb-3 mb-md-0 border-right">
                 <h4 class="font-weight-bold">Filteri</h4>
-                <p class="border-bottom" data-target="#filter" data-toggle="collapse">Proizvođači <span
+                <p class="border-bottom" data-target="#filter" data-toggle="collapse">Proizvođači<span
                         class="float-right"><i class="fas fa-angle-down"></i></span></p>
                 <div id="filter" class="collapse">
-                    <app-filters class="form-check" *ngFor="let producer of producers" [producer]="producer"></app-filters>
+
+                    <app-filters class="form-check" *ngFor="let producer of producers" [producer]="producer">
+                    </app-filters>
+                    
                 </div>
             </div>
             <div class="col-md-9">
@@ -45,7 +50,8 @@
 
                     <div class="row my-3">
 
-                        <app-product class="col-sm-6 col-lg-4 mb-3" *ngFor="let product of products" [product]="product"></app-product>
+                        <app-product class="col-sm-6 col-lg-4 mb-3" *ngFor="let product of products"
+                            [product]="product"></app-product>
 
                     </div>
                     <div class="row bg-light py-2 mt-3">

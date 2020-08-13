@@ -12,6 +12,7 @@ import { SubCategoriesPageComponent } from './pages/sub-categories-page/sub-cate
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProductComponent } from './pages/products-page/product/product.component';
 import { FiltersComponent } from './pages/products-page/filters/filters.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FiltersComponent } from './pages/products-page/filters/filters.componen
     SubCategoriesPageComponent,
     HomePageComponent,
     ProductComponent,
-    FiltersComponent
+    FiltersComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
