@@ -6,6 +6,7 @@ export class Product {
     public producer: Producer;
     public subCategory: SubCategory;
     public price: number;
+    public priceWithDiscount;
     public discount: number;
     public stock: number;
     public isActive: boolean;

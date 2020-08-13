@@ -1,20 +1,104 @@
 <div class="container">
     <div class="my-3">
         <small class="text-secondary">
-            <a [routerLink]="['/home']" class="px-3 text-secondary text-decoration-none">Početna</a> 
+            <a [routerLink]="['/home']" class="pr-3 text-secondary text-decoration-none">Početna</a>
 
             <i class="fas fa-caret-right"></i>
 
             <a [routerLink]="['/', categoryName | lowercase | replace:' ':'-']"
-                class="px-3 text-secondary text-decoration-none">{{categoryName}}</a> 
-                
-                <i class="fas fa-caret-right"></i>
-                
+                class="px-3 text-secondary text-decoration-none">{{categoryName | titlecase}}</a>
+
+            <i class="fas fa-caret-right"></i>
+
             <a [routerLink]="['/', categoryName | lowercase | replace:' ':'-', subCategoryName | lowercase | replace:' ':'-']"
-                class="font-weight-bold px-3 text-logo text-decoration-none">{{subCategoryName}}</a>
+                class="font-weight-bold px-3 text-logo text-decoration-none">{{subCategoryName | titlecase}}</a>
         </small>
     </div>
-    <!-- <div class="my-3" *ngFor="let product of products">
-        <img [src]="product.imageFile" alt="Slika">
-    </div> -->
+    <div class="my-4">
+        <div class="row">
+            <div class="col-md-3 mb-3 mb-md-0 border-right">
+                <h4 class="font-weight-bold">Filteri</h4>
+                <div class="container-fluid">
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h4 class="font-weight-bold">{{subCategoryName | titlecase}}</h4>
+
+                <div class="alert alert-info" *ngIf="products && products.length === 0">
+                    Trenutno nema proizovda za izabranu kategoriju!
+                </div>
+                
+                <div class="container-fluid" *ngIf="products && products.length > 0">
+                    <div class="row bg-light py-2 my-3">
+                        <div class="offset-md-8 col-md-4 py-1">
+                            <select class="custom-select custom-select-sm align-self-center">
+                                <option value="">Prikaz proizvoda</option>
+                                <option value="">Cena rastuće</option>
+                                <option value="">Cena opadajuće</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row my-3">
+                        <div class="col-sm-6 col-lg-4 mb-3" *ngFor="let product of products">
+                            <div class="card border h-100 artikal-senka">
+                                <img class="card-img-top border-bottom img-trazeni-artikal" [src]="product.imageFile"
+                                    alt="">
+                                <div class="card-body p-0 d-flex flex-column">
+
+                                    <div class="div-arrow w-25 bg-logo text-orange font-weight-bold mt-2">
+                                        -{{product.discount}}%
+                                    </div>
+
+                                    <h6 class="font-weight-normal mx-2 text-justify mt-2">{{product.description}}</h6>
+
+                                    <div *ngIf="product.stock > 0 then thenState else elseState"></div>
+                                    <ng-template #thenState>
+                                        <small class="mx-2 text-success"><i class="fas fa-circle"></i> Na stanju</small>
+                                    </ng-template>
+                                    <ng-template #elseState>
+                                        <small class="mx-2 text-red"><i class="fas fa-circle"></i> Nije na
+                                            stanju</small>
+                                    </ng-template>
+
+
+                                    <div class="mt-auto"
+                                        *ngIf="product.discount > 0 then thenDiscount else elseDiscount">
+                                    </div>
+                                    <ng-template #thenDiscount>
+                                        <div class="text-right mr-2">
+                                            <h6 class="font-weight-normal mb-0">
+                                                <s>{{product.price | currency:'RSD '}}</s></h6>
+                                            <span class="text-red"><small>Ušteda
+                                                    {{(product.price-product.priceWithDiscount)| currency:'RSD '}}</small></span>
+                                            <h5>{{product.priceWithDiscount | currency:'RSD '}}</h5>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template #elseDiscount>
+                                        <div class="text-right mr-2">
+                                            <h5>{{product.price | currency:'RSD '}}</h5>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-block bg-logo text-light">Detaljnije</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bg-light py-2 mt-3">
+                        <div class="col-md-4">
+
+                            <ul class="pagination pagination-md m-0">
+                                <li class="page-item selected" *ngFor="let page of pages">
+                                    <button [ngClass]="{'bg-red': page === 1}" class="page-link bg-logo text-light" id="btn_{{page}}" (click)="changePage(page)">{{page}}</button>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

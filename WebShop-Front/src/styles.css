@@ -1,9 +1,51 @@
 * {
-    font-family: 'Noto Sans JP';
+    font-family: 'Roboto';
 }
+
 .bg-logo {
     background-color: #0741AD !important;
 }
+
 .text-logo {
     color: #0741AD !important;
+}
+
+.text-red {
+    color: #cc2036 !important;
+}
+
+.bg-red {
+    background-color: #cc2036 !important;
+}
+
+.text-orange {
+    color: #fb8b24 !important;
+}
+
+.bg-orange {
+    background-color: #fb8b24;
+}
+
+.div-arrow {
+    height:34px;
+    position:relative;
+    text-align:center;
+    line-height:34px;
+}
+
+.div-arrow:after {
+    content:"";
+    position:absolute;
+    height:0;
+    width:0;
+    left:100%;
+    top:0;
+    border:17px solid transparent;
+    border-left: 17px solid #0741AD;
+}
+
+.img-trazeni-artikal {
+    height: 200px !important;
+    max-width: 100%;
+    object-fit: contain;
 }
