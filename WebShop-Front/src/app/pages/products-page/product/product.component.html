@@ -1,0 +1,42 @@
+
+    <div class="card border h-100">
+        <img class="card-img-top border-bottom img-trazeni-artikal" [src]="product.imageFile" alt="">
+        <div class="card-body p-0 d-flex flex-column">
+
+            <div class="div-arrow w-25 bg-logo text-orange font-weight-bold mt-2">
+                -{{product.discount}}%
+            </div>
+
+            <h6 class="font-weight-normal mx-2 text-justify mt-2">{{product.description}}</h6>
+
+            <div *ngIf="product.stock > 0 then thenState else elseState"></div>
+            <ng-template #thenState>
+                <small class="mx-2 text-success"><i class="fas fa-circle"></i> Na stanju</small>
+            </ng-template>
+            <ng-template #elseState>
+                <small class="mx-2 text-red"><i class="fas fa-circle"></i> Nije na
+                    stanju</small>
+            </ng-template>
+
+
+            <div class="mt-auto" *ngIf="product.discount > 0 then thenDiscount else elseDiscount">
+            </div>
+            <ng-template #thenDiscount>
+                <div class="text-right mr-2">
+                    <h6 class="font-weight-normal mb-0">
+                        <s>{{product.price | currency:'RSD '}}</s></h6>
+                    <span class="text-red"><small>Ušteda
+                            {{(product.price-product.priceWithDiscount)| currency:'RSD '}}</small></span>
+                    <h5>{{product.priceWithDiscount | currency:'RSD '}}</h5>
+                </div>
+            </ng-template>
+            <ng-template #elseDiscount>
+                <div class="text-right mr-2">
+                    <h5>{{product.price | currency:'RSD '}}</h5>
+                </div>
+            </ng-template>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-block bg-logo text-light">Detaljnije</button>
+        </div>
+    </div>

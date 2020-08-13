@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { CategoryService } from '../services/category.service';
-import { Category } from '../models/category';
+import { UserService } from '../../services/user.service';
+import { CategoryService } from '../../services/category.service';
+import { Category } from '../../models/category';
 import { HostListener } from '@angular/core';
 
 @Component({

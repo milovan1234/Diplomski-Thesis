@@ -3,13 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsPageComponent } from './pages/products-page/products-page.component';
 import { RouterModule } from '@angular/router';
 import { ReplacePipe } from './replace.pipe';
 import { SubCategoriesPageComponent } from './pages/sub-categories-page/sub-categories-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { ProductComponent } from './pages/products-page/product/product.component';
+import { FiltersComponent } from './pages/products-page/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     ProductsPageComponent,
     ReplacePipe,
     SubCategoriesPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    ProductComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,
