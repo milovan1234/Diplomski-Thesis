@@ -1,2 +1,4 @@
-<input class="form-check-input" type="checkbox" id="{{producer.producerName}}" value="{{producer.producerName}}">
-<label class="form-check-label" for="{{producer.producerName}}">{{producer.producerName}}</label>
+<input class="form-check-input" type="checkbox" id="cb_{{producer.id}}" value="{{producer.producerName}}"
+    [checked]="producer.isCheck" (click)="onClickProducer(producer.id)">
+<label class="form-check-label" for="{{producer.producerName}}"
+    (click)="onClickProducer(producer.id)">{{producer.producerName}}</label>

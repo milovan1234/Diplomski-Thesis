@@ -9,11 +9,16 @@
                 class="font-weight-bold px-3 text-logo text-decoration-none">{{categoryName | titlecase}}</a>
         </small>
     </div>
-    <div class="row my-4 px-3 px-md-0">
+    <div class="row my-4 px-3 px-md-0" *ngIf="subCategories && subCategories.length > 0">
         <a class="text-dark text-decoration-none col-md-3 mx-md-2 my-2 border px-5 py-3 text-center"
             *ngFor="let subCategory of subCategories"
-            [routerLink]="[subCategory.subCategoryName | lowercase | replace:' ':'-']">
+            [routerLink]="[subCategory.subCategoryName | lowercase | replace:' ':'-']" [queryParams]="{page: 1}">
             {{subCategory.subCategoryName}} <i class="fas fa-angle-right"></i>
         </a>
+    </div>
+    <div class="row my-4 px-3 px-md-0" *ngIf="subCategories && subCategories.length == 0">
+        <div class="alert alert-info w-100">
+            Trenutno nema podkategorija za izabranu kategoriju.
+        </div>
     </div>
 </div>

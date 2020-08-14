@@ -20,11 +20,11 @@
         <div class="row">
             <div class="col-md-3 mb-3 mb-md-0 border-right">
                 <h4 class="font-weight-bold">Filteri</h4>
-                <p class="border-bottom" data-target="#filter" data-toggle="collapse">Proizvođači<span
+                <p class="border-bottom" data-target="#filter" data-toggle="collapse" role="button">Proizvođači<span
                         class="float-right"><i class="fas fa-angle-down"></i></span></p>
                 <div id="filter" class="collapse">
 
-                    <app-filters class="form-check" *ngFor="let producer of producers" [producer]="producer">
+                    <app-filters class="form-check" (onClick)="onClickProducer($event)" *ngFor="let producer of producers" [producer]="producer">
                     </app-filters>
                     
                 </div>
@@ -40,8 +40,8 @@
                     <div class="row bg-light py-2 my-3">
                         <div class="offset-md-8 col-md-4 py-1">
                             <select #sort (change)='onSortSelected(sort.value)'
-                                class="custom-select custom-select-sm align-self-center">
-                                <option value="">Prikaz proizvoda</option>
+                                class="custom-select custom-select-sm align-self-center" [value]="sortWay">
+                                <option value="undefined">Prikaz proizvoda</option>
                                 <option value="asc">Cena rastuće</option>
                                 <option value="desc">Cena opadajuće</option>
                             </select>
@@ -59,7 +59,7 @@
 
                             <ul class="pagination pagination-md m-0">
                                 <li class="page-item selected" *ngFor="let page of pages">
-                                    <button [ngClass]="{'bg-red': page === 1}" class="page-link bg-logo text-light"
+                                    <button [ngClass]="{'bg-red': page == currentPage}" class="page-link bg-logo text-light"
                                         id="btn_{{page}}" (click)="changePage(page)">{{page}}</button>
                                 </li>
                             </ul>
