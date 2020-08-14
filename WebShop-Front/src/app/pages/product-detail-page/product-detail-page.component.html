@@ -1,0 +1,25 @@
+<div class="container" *ngIf="product">
+
+    <div class="my-3">
+        <small class="text-secondary">
+            <a [routerLink]="['/home']" class="pr-3 text-secondary text-decoration-none">Početna</a>
+
+            <i class="fas fa-caret-right"></i>
+
+            <a [routerLink]="['/', categoryName | lowercase | replace:' ':'-']"
+                class="px-3 text-secondary text-decoration-none">{{categoryName | titlecase}}</a>
+
+            <i class="fas fa-caret-right"></i>
+
+            <a [routerLink]="['/', categoryName | lowercase | replace:' ':'-', subCategoryName | lowercase | replace:' ':'-']"
+               [queryParams]="{page: 1}" class="px-3 text-secondary text-decoration-none">{{subCategoryName | titlecase}}</a>
+
+            <i class="fas fa-caret-right"></i>
+
+            <a [routerLink]="['/', categoryName | lowercase | replace:' ':'-', subCategoryName | lowercase | replace:' ':'-', productId]"
+                class="px-3 font-weight-bold text-logo text-decoration-none">{{product.description | titlecase}}</a>
+        </small>
+    </div>
+    <h5 class="my-4">{{product.description}}</h5>
+    <app-product-detail [product]="product"></app-product-detail>
+</div>

@@ -49,3 +49,24 @@
     max-width: 100%;
     object-fit: contain;
 }
+
+.div-product {
+    position: relative;
+    width: 50px !important;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+}
+
+.div-product::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -50%;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: solid 25px #0741AD;
+    border-left: solid 25px transparent;
+    border-right: solid 25px transparent;
+}

@@ -13,6 +13,9 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProductComponent } from './shared/product/product.component';
 import { FiltersComponent } from './pages/products-page/filters/filters.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { ProductDetailPageComponent } from './pages/product-detail-page/product-detail-page.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { ProductDetailComponent } from './pages/product-detail-page/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,16 +27,22 @@ import { FooterComponent } from './shared/footer/footer.component';
     HomePageComponent,
     ProductComponent,
     FiltersComponent,
-    FooterComponent
+    FooterComponent,
+    ProductDetailPageComponent,
+    ErrorPageComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot([
-      { path: 'home', component: HomePageComponent, pathMatch: 'full' },
+      { path: 'home', component: HomePageComponent },
+      { path: 'error', component: ErrorPageComponent, pathMatch: 'full' },
       { path: ':categoryName', component: SubCategoriesPageComponent, pathMatch: 'full' },
       { path: ':categoryName/:subCategoryName', component: ProductsPageComponent, pathMatch: 'full' },
-      { path: '', redirectTo: 'home', pathMatch: 'full' }
+      { path: ':categoryName/:subCategoryName/:productId', component: ProductDetailPageComponent, pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '**', redirectTo: 'error', pathMatch: 'full' }
     ]),
     HttpClientModule
   ],

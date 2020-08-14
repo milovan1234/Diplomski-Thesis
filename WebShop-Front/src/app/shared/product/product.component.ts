@@ -8,6 +8,8 @@ import { Product } from 'src/app/models/product';
 })
 export class ProductComponent implements OnInit {
   @Input() product: Product;
+  @Input() categoryName: string;
+  @Input() subCategoryName: string;
   constructor() { }
 
   ngOnInit(): void {

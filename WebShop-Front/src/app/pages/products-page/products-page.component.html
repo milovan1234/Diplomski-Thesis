@@ -12,7 +12,7 @@
             <i class="fas fa-caret-right"></i>
 
             <a [routerLink]="['/', categoryName | lowercase | replace:' ':'-', subCategoryName | lowercase | replace:' ':'-']"
-                class="font-weight-bold px-3 text-logo text-decoration-none">{{subCategoryName | titlecase}}</a>
+                [queryParams]="{page: 1}" class="font-weight-bold px-3 text-logo text-decoration-none">{{subCategoryName | titlecase}}</a>
         </small>
     </div>
 
@@ -51,7 +51,9 @@
                     <div class="row my-3">
 
                         <app-product class="col-sm-6 col-lg-4 mb-3" *ngFor="let product of products"
-                            [product]="product"></app-product>
+                            [categoryName]="categoryName"  
+                            [product]="product"
+                            [subCategoryName]="subCategoryName"></app-product>
 
                     </div>
                     <div class="row bg-light py-2 mt-3">

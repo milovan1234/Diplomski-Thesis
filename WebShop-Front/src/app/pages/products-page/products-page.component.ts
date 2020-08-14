@@ -29,7 +29,8 @@ export class ProductsPageComponent implements OnInit {
 
   public producers: Producer[];
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private subCategoryService: SubCategoryService,
     private productService: ProductService,
     private producerService: ProducerService,
@@ -50,10 +51,13 @@ export class ProductsPageComponent implements OnInit {
 
         this.subCategoryService.getSubCategories().subscribe({
           next: subCategories => {
-            this.subCategoryId = subCategories.find(x => x.subCategoryName.toLowerCase() == this.subCategoryName).id;
+            this.subCategoryId = subCategories.find(x => x.subCategoryName.toLowerCase() == this.subCategoryName)?.id;
 
             this.getProducts();
             this.getProducers();
+          },
+          error: error => {
+            this.router.navigate(['/error']);
           }
         });
       });
@@ -86,6 +90,9 @@ export class ProductsPageComponent implements OnInit {
           this.pages[i] = i + 1;
         }
         this.setProductsForShow(this.filterProducts);
+      },
+      error: error => {
+        this.router.navigate(['/error']);
       }
     });
   }
@@ -97,6 +104,9 @@ export class ProductsPageComponent implements OnInit {
         this.producers.forEach(x => {
           x.isCheck = this.selectProducers.find(y => y == x.producerName) != null ? true : false;
         });
+      },
+      error: error => {
+        this.router.navigate(['/error']);
       }
     });
   }
@@ -131,9 +141,9 @@ export class ProductsPageComponent implements OnInit {
       this.selectProducers = this.selectProducers.filter(x => x != producer.producerName);
     }
     this.router.navigate([], {
-      queryParams: { 
+      queryParams: {
         producer: this.selectProducers.join("#") == "" ? undefined : this.selectProducers.join("#"),
-        page: 1 
+        page: 1
       },
       queryParamsHandling: 'merge'
     });
@@ -141,7 +151,7 @@ export class ProductsPageComponent implements OnInit {
 
   filteredByProducers(): void {
     this.filterProducts = this.filterProducts
-                  .filter(x => this.selectProducers.join("").toLowerCase().includes(x.producer.producerName.toLowerCase()));
+      .filter(x => this.selectProducers.join("").toLowerCase().includes(x.producer.producerName.toLowerCase()));
   }
 
   productsSort(products: Product[], sortWay: string): void {

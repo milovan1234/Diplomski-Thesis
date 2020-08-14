@@ -13,7 +13,7 @@ export class ProductService {
   public getProductsForSubCategory(subCategoryId: number) : Observable<Product[]> {
     return this.http.get<Product[]>(`http://localhost:56123/api/subcategories/${subCategoryId}/products`);
   }
-  public getImageFile(productId: number): Observable<any> {
-    return this.http.get<any>(`http://localhost:56123/api/products/${productId}/photo`);
+  public getProduct(productId: number): Observable<Product> {
+    return this.http.get<Product>(`http://localhost:56123/api/products/${productId}`);
   }
 }

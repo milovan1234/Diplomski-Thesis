@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SubCategory } from 'src/app/models/subCategory';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
 import { SubCategoryService } from 'src/app/services/sub-category.service';
 
@@ -16,15 +16,19 @@ export class SubCategoriesPageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, 
               private categoryService: CategoryService, 
-              private subCategoryService: SubCategoryService) { }
+              private subCategoryService: SubCategoryService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.route.url.subscribe(params => {
       this.categoryName = params[0].path.replace(/-/g, " ");
       this.categoryService.getCategories().subscribe({
         next: categories => {
-          this.categoryId = categories.find(x => x.categoryName.toLowerCase() == this.categoryName).id;
+          this.categoryId = categories.find(x => x.categoryName.toLowerCase() == this.categoryName)?.id;
           this.getSubCategories();
+        },
+        error: error => {
+          this.router.navigate(['/error']);
         }
       });
     });    
@@ -34,6 +38,9 @@ export class SubCategoriesPageComponent implements OnInit {
     this.subCategoryService.getSubCategoriesForCategory(this.categoryId).subscribe({
       next: subCategories => {
         this.subCategories = subCategories;
+      },
+      error: error => {
+        this.router.navigate(['/error']);
       }
     });
   }
