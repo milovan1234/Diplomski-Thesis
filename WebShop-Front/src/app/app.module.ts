@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 import { ReplacePipe } from './replace.pipe';
 import { SubCategoriesPageComponent } from './pages/sub-categories-page/sub-categories-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { ProductComponent } from './pages/products-page/product/product.component';
+import { ProductComponent } from './shared/product/product.component';
 import { FiltersComponent } from './pages/products-page/filters/filters.component';
 import { FooterComponent } from './shared/footer/footer.component';
 

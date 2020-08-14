@@ -122,7 +122,7 @@ export class ProductsPageComponent implements OnInit {
   }
 
   onClickProducer(producerId: number): void {
-    let producer = this.producers.find(x => x.id == producerId)
+    let producer = this.producers.find(x => x.id == producerId);
     producer.isCheck = !producer.isCheck;
     if (producer.isCheck && this.selectProducers.find(x => x == producer.producerName) == null) {
       this.selectProducers.push(producer.producerName);
@@ -131,7 +131,10 @@ export class ProductsPageComponent implements OnInit {
       this.selectProducers = this.selectProducers.filter(x => x != producer.producerName);
     }
     this.router.navigate([], {
-      queryParams: { producer: this.selectProducers.join("#") == "" ? undefined : this.selectProducers.join("#") },
+      queryParams: { 
+        producer: this.selectProducers.join("#") == "" ? undefined : this.selectProducers.join("#"),
+        page: 1 
+      },
       queryParamsHandling: 'merge'
     });
   }
