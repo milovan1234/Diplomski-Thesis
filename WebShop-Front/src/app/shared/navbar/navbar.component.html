@@ -1,7 +1,7 @@
 <div class="d-none d-md-block">
     <div class="row bg-light m-0">
         <div class="col-sm-3 text-center align-self-center">
-            <img src="../../../assets/images/logo.png" alt="Logo" class="img-fluid" width="100" height="100">
+            <img (click)="onClickLogo()" role="button" src="../../../assets/images/logo.png" alt="Logo" class="img-fluid" width="100" height="100">
         </div>
         <div class="col-sm-6 text-center align-self-center py-3">
             <div class="input-group px-5">
@@ -75,7 +75,7 @@
                 </div>
             </div>
         </ng-template>
-        <img src="../../../assets/images/logo-light.png" alt="Logo" class="img-fluid" width="60" height="60">
+        <img (click)="onClickLogo()" role="button" src="../../../assets/images/logo-light.png" alt="Logo" class="img-fluid" width="60" height="60">
     </div>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav pl-md-5">

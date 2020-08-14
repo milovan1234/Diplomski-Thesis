@@ -70,3 +70,11 @@
     border-left: solid 25px transparent;
     border-right: solid 25px transparent;
 }
+
+.not-found {
+    font-size: 80px !important;
+}
+
+.not-found-text {
+    font-size: 40px !important;
+}

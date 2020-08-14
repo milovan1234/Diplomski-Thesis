@@ -160,4 +160,13 @@ export class ProductsPageComponent implements OnInit {
     });
   }
 
+  onResize(event) {
+    if(event.target.innerWidth < 768){
+      document.querySelector("#filter").classList.remove("border-right");
+    }
+    else {
+      document.querySelector("#filter").classList.add("border-right");
+    }
+  }
+
 }
