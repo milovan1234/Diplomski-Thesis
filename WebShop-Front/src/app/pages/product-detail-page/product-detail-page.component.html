@@ -21,5 +21,6 @@
         </small>
     </div>
     <h5 class="my-4">{{product.description}}</h5>
-    <app-product-detail [product]="product"></app-product-detail>
+
+    <app-product-detail *ngIf="product" [product]="product"></app-product-detail>
 </div>

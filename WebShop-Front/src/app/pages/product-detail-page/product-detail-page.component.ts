@@ -41,9 +41,6 @@ export class ProductDetailPageComponent implements OnInit {
         product.imageFile = this.sanitizer.bypassSecurityTrustUrl('data:image/*;base64,' + product.imageFile);
         product.priceWithDiscount = (product.discount > 0) ? (product.price - Math.round(product.price * (product.discount / 100))) : product.price;;
         this.product = product;
-      },
-      error: error => {
-        this.router.navigate(['/error']);
       }
     });
   }

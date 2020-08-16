@@ -26,9 +26,6 @@ export class SubCategoriesPageComponent implements OnInit {
         next: categories => {
           this.categoryId = categories.find(x => x.categoryName.toLowerCase() == this.categoryName)?.id;
           this.getSubCategories();
-        },
-        error: error => {
-          this.router.navigate(['/error']);
         }
       });
     });    
@@ -38,9 +35,6 @@ export class SubCategoriesPageComponent implements OnInit {
     this.subCategoryService.getSubCategoriesForCategory(this.categoryId).subscribe({
       next: subCategories => {
         this.subCategories = subCategories;
-      },
-      error: error => {
-        this.router.navigate(['/error']);
       }
     });
   }
