@@ -55,6 +55,9 @@ export class ProductsPageComponent implements OnInit {
 
             this.getProducts();
             this.getProducers();
+          },
+          error: error => {
+            this.router.navigate(['/error']);
           }
         });
       });
@@ -87,6 +90,9 @@ export class ProductsPageComponent implements OnInit {
           this.pages[i] = i + 1;
         }
         this.setProductsForShow(this.filterProducts);
+      },
+      error: error => {
+        this.router.navigate(['/error']);
       }
     });
   }
@@ -98,6 +104,9 @@ export class ProductsPageComponent implements OnInit {
         this.producers.forEach(x => {
           x.isCheck = this.selectProducers.find(y => y == x.producerName) != null ? true : false;
         });
+      },
+      error: error => {
+        this.router.navigate(['/error']);
       }
     });
   }

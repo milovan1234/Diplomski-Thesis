@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
 
 import { JwtInterceptor } from './temp/jwt.interceptor';
 import { ErrorInterceptor } from './temp/error.interceptor';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ErrorInterceptor } from './temp/error.interceptor';
     ProductDetailPageComponent,
     ErrorPageComponent,
     ProductDetailComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    RegisterPageComponent
   ],
   imports: [
     FormsModule,
@@ -49,7 +51,8 @@ import { ErrorInterceptor } from './temp/error.interceptor';
     RouterModule.forRoot([
       { path: 'home', component: HomePageComponent },
       { path: 'error', component: ErrorPageComponent, pathMatch: 'full' },
-      { path: 'login', component: LoginPageComponent, pathMatch: 'full', canActivate: [AuthGuard]  },
+      { path: 'login', component: LoginPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+      { path: 'register', component: RegisterPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: ':categoryName', component: SubCategoriesPageComponent, pathMatch: 'full' },
       { path: ':categoryName/:subCategoryName', component: ProductsPageComponent, pathMatch: 'full' },
       { path: ':categoryName/:subCategoryName/:productId', component: ProductDetailPageComponent, pathMatch: 'full' },

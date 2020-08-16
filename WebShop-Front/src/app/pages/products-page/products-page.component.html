@@ -25,15 +25,17 @@
         <div class="row">
             <div id="filter" (window:resize)="onResize($event)" class="col-md-3 mb-3 mb-md-0 border-right">
                 <h4 class="font-weight-bold">Filteri</h4>
-                <p class="border-bottom" data-target="#filter" data-toggle="collapse" role="button">Proizvođači<span
+                <p class="border-bottom" data-target="#filterCollapse" data-toggle="collapse" role="button">Proizvođači<span
                         class="float-right"><i class="fas fa-angle-down"></i></span></p>
-                <div id="filter" class="collapse">
+
+                <div id="filterCollapse" class="collapse">
 
                     <app-filters class="form-check" (onClick)="onClickProducer($event)"
                         *ngFor="let producer of producers" [producer]="producer">
                     </app-filters>
 
                 </div>
+
             </div>
             <div class="col-md-9">
                 <h4 class="font-weight-bold">{{subCategoryName | titlecase}}</h4>

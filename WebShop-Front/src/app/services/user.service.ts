@@ -29,6 +29,21 @@ export class UserService {
     }));;
   }
 
+  userRegister(firstName: string, 
+               lastName: string, 
+               email: string, 
+               password: string, 
+               phoneNumber: string)
+  {
+    return this.http.post<User>(`http://localhost:56123/api/users/register`, { 
+      firstName,
+      lastName,
+      email,
+      password,
+      phoneNumber
+    });
+  }
+
   userLogout(): void {
     localStorage.clear();
     this.isLogin = false;

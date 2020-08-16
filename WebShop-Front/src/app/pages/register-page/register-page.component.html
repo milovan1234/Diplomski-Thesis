@@ -1,0 +1,75 @@
+<div class="container">
+    <h4 class="my-3">Kreiraj korisnički nalog</h4>
+    <div class="row my-3">
+        <div class="offset-md-3 col-md-6">
+            <h5 class="my-3">Lični podaci</h5>
+
+            <div *ngIf="userRegisterForm">
+                <form class="mt-3" [formGroup]="userRegisterForm" (ngSubmit)="userRegister()">
+
+                    <div class="form-group my-2">
+                        <label for="fn"><small>Ime <span class="text-red">*</span></small></label>
+                        <input type="text" formControlName="firstName" class="form-control" id="fn">
+                        <small *ngIf="userRegisterForm.get('firstName').hasError('pattern') 
+                            && userRegisterForm.get('firstName').touched" class="form-text text-red">
+                            Ime nije pravilno uneseno
+                        </small>
+                    </div>
+
+                    <div class="form-group my-2">
+                        <label for="ln"><small>Prezime <span class="text-red">*</span></small></label>
+                        <input type="text" formControlName="lastName" class="form-control" id="ln">
+                        <small *ngIf="userRegisterForm.get('lastName').hasError('pattern') 
+                            && userRegisterForm.get('lastName').touched" class="form-text text-red">
+                            Prezime nije pravilno uneseno
+                        </small>
+                    </div>
+
+                    <div class="form-group my-2">
+                        <label for="pn"><small>Broj telefona <span class="text-red">*</span></small></label>
+                        <input type="text" formControlName="phoneNumber" placeholder="+381 6x xxx-xxxx" class="form-control" id="pn">
+                        <small *ngIf="userRegisterForm.get('phoneNumber').hasError('pattern') 
+                            && userRegisterForm.get('phoneNumber').touched" class="form-text text-red">
+                            Broj telefona nije pravilno unesen
+                        </small>
+                    </div>
+
+                    <h5 class="mt-4 mb-3">Podaci za prijavu</h5>
+
+                    <div class="form-group my-2">
+                        <label for="em"><small>Email adresa <span class="text-red">*</span></small></label>
+                        <input type="text" formControlName="email" class="form-control" id="em">
+                        <small *ngIf="userRegisterForm.get('email').hasError('email') 
+                            && userRegisterForm.get('email').touched" class="form-text text-red">
+                            Email adresa nije ispravno unesena
+                        </small>
+                    </div>
+
+                    <div class="form-group my-2">
+                        <label for="pass"><small>Lozinka <span class="text-red">*</span></small></label>
+                        <input type="password" formControlName="password" placeholder="JohnD._,123" class="form-control" id="pass">
+                        <small *ngIf="userRegisterForm.get('password').hasError('pattern') 
+                        && userRegisterForm.get('password').touched" class="form-text text-red">
+                            Lozinka nije ispravno unesena
+                        </small>
+                    </div>
+
+                    <div class="form-group my-2">
+                        <label for="confPass"><small>Potvrdite lozinku <span class="text-red">*</span></small></label>
+                        <input type="password" formControlName="confirmPassword" class="form-control" id="confPass">
+                        <small *ngIf="userRegisterForm.get('password').value != '' && userRegisterForm.get('confirmPassword').touched &&
+                                userRegisterForm.get('password').value != userRegisterForm.get('confirmPassword').value" class="form-text text-red">
+                            Potvrdjena lozinka nije ispravna
+                        </small>
+                    </div>
+
+                    <button type="submit" [disabled]="!userRegisterForm.valid" class="btn bg-logo text-light my-3">
+                        Registruj se
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
