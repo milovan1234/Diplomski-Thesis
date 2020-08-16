@@ -47,5 +47,11 @@ export class NavbarComponent implements OnInit {
   onClickLogo() : void {
     this.router.navigate(['/home']);
   }
+
+  onClickLogout(): void {
+    this.userService.userLogout();
+    alert("Uspešno ste se odjavili!");
+    this.router.navigate(['/home']);
+  }
   
 }
