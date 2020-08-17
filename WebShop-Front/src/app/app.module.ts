@@ -17,12 +17,15 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { ProductDetailComponent } from './pages/product-detail-page/product-detail/product-detail.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuard } from './temp/auth.guard';
+import { UserGuard } from './temp/user.guard';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { JwtInterceptor } from './temp/jwt.interceptor';
 import { ErrorInterceptor } from './temp/error.interceptor';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { CookieService } from 'ngx-cookie-service';
+import { ShopCartPageComponent } from './pages/shop-cart-page/shop-cart-page.component';
+import { CartProductComponent } from './pages/shop-cart-page/cart-product/cart-product.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { CookieService } from 'ngx-cookie-service';
     ErrorPageComponent,
     ProductDetailComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    ShopCartPageComponent,
+    CartProductComponent
   ],
   imports: [
     FormsModule,
@@ -51,6 +56,7 @@ import { CookieService } from 'ngx-cookie-service';
       { path: 'home', component: HomePageComponent },
       { path: 'error', component: ErrorPageComponent, pathMatch: 'full' },
       { path: 'login', component: LoginPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+      { path: 'cart', component: ShopCartPageComponent, pathMatch: 'full' , canActivate: [UserGuard]},
       { path: 'register', component: RegisterPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: ':categoryName', component: SubCategoriesPageComponent, pathMatch: 'full' },
       { path: ':categoryName/:subCategoryName', component: ProductsPageComponent, pathMatch: 'full' },

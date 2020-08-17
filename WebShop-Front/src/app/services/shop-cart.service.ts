@@ -21,10 +21,10 @@ export class ShopCartService {
       }
     }
     this.products.push(product);
-    this.cookieService.set('cartProducts', JSON.stringify(this.products));
+    this.cookieService.set('cartProducts', JSON.stringify(this.products), 7);
   }
 
-  deleteProduct(productId: number) : void {
+  deleteProductFromCart(productId: number) : void {
     this.products = this.products.filter(x => x.productId != productId);
     this.cookieService.set('cartProducts', JSON.stringify(this.products));
   }

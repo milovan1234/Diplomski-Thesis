@@ -1,0 +1,77 @@
+<div class="container">
+
+    <h4 class="my-3">Korpa</h4>
+
+    <div class="spinner-border text-red" *ngIf="!products" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+
+    <div *ngIf='products && products.length == 0'>
+        <div class="alert alert-info">
+            Vaša korpa je trenutno prazna.
+        </div>
+    </div>
+
+    <div class="p-2" *ngIf='products && products.length > 0'>
+        <div class="row mt-4 text-dark border-bottom border-top py-2 d-none d-md-flex bg-light">
+            <div class="col-md-6 font-weight-bold">
+                Proizvod
+            </div>
+            <div class="col-md-2 font-weight-bold">
+                Pojedinačna cena
+            </div>
+            <div class="col-md-1 font-weight-bold">
+                Količina
+            </div>
+            <div class="col-md-2 font-weight-bold">
+                Ukupno
+            </div>
+            <div class="col-md-1 font-weight-bold">
+                Ukloni
+            </div>
+        </div>
+
+        <app-cart-product class="row text-dark border-bottom border-top py-2" *ngFor='let product of products'
+            [product]='product' (onChange)="calculateSum($event)" (onDelete)='loadProductsFromCookie()'></app-cart-product>
+
+    </div>
+
+    <div class="row mt-2" *ngIf='products && products.length > 0 '>
+        <div class="offset-sm-6 offset-md-8 col-sm-6 col-md-4 p-3">
+
+            <div class="row my-2">
+                <div class="col-6">
+                    <small class="text-secondary">Ukupno bez popusta</small>
+                </div>
+                <div class="col-6 text-secondary text-right">
+                    {{sumWithoutDiscount | currency:'RSD '}}
+                </div>
+            </div> 
+
+            <div class="row my-2">
+                <div class="col-6 border-bottom">
+                    <small class="text-secondary">Popust</small>
+                </div>
+                <div class="col-6 text-secondary border-bottom text-right">
+                    {{sumDiscount | currency:'RSD '}}
+                </div>
+            </div> 
+
+            <div class="row">
+                <div class="col-6">
+                    <h5 class="font-weight-bold text-logo m-0">Sve ukupno</h5>
+                </div>
+                <div class="col-6 text-right font-weight-bold text-logo">
+                    {{(sumWithoutDiscount-sumDiscount) | currency:'RSD '}}
+                </div>
+            </div> 
+
+        </div>
+    </div>
+
+    <div *ngIf='products && products.length > 0 && userService.isLogin'>
+        <h4 class="mb-3 mt-4" >Dodatni podaci za obavanje kupovine</h4>
+    </div>
+    
+
+</div>

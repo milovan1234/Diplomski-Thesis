@@ -55,5 +55,9 @@ export class NavbarComponent implements OnInit {
     alert("Uspešno ste se odjavili!");
     this.router.navigate(['/home']);
   }
+
+  onClickCart() : void {
+    this.router.navigate(['/cart']);
+  }
   
 }
