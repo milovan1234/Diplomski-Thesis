@@ -46,6 +46,7 @@ namespace WebShop_Back.Services
                     throw new Exception("Quantity cannot be greater than stock.");
                 }
                 productInDb.Stock = newStock;
+                productInDb.CountSold += x.Quantity;
 
                 order.TotalPrice += productInDb.Price * x.Quantity;
                 order.TotalPriceDiscount += (productInDb.Price - Math.Round(productInDb.Price * (productInDb.Discount / 100.0), 0)) * x.Quantity;

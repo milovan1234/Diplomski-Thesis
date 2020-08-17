@@ -48,5 +48,8 @@ namespace WebShop_Back.Models
 
         [NotMapped]
         public byte[] ImageFile { get; set; }
+
+        [Required]
+        public int CountSold { get; set; }
     }
 }
