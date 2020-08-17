@@ -48,7 +48,7 @@
                 data-placement="top" title="Vaša korpa" *ngIf='!userService.isLogin 
                     || (userService.isLogin && userService.user.role.roleName == "User")'>
                 <i class="fas fa-shopping-cart"></i>
-                <sup><span class="badge bg-red text-light ml-1">0</span></sup>
+                <sup><span class="badge bg-red text-light ml-1">{{shopCartService.products.length}}</span></sup>
             </button>
 
         </div>
@@ -88,7 +88,7 @@
         <button type="button" class="btn bg-logo text-light mx-2 py-2 px-3" data-toggle="tooltip" data-placement="top"
             title="Vaša korpa" *ngIf='!userService.isLogin || (userService.isLogin && userService.user.role.roleName == "User")'>
             <i class="fas fa-shopping-cart"></i>
-            <sup><span class="badge bg-red text-light ml-1">0</span></sup>
+            <sup><span class="badge bg-red text-light ml-1">{{shopCartService.products.length}}</span></sup>
         </button>
 
         <img (click)="onClickLogo()" role="button" src="../../../assets/images/logo-light.png" alt="Logo"

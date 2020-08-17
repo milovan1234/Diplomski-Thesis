@@ -12,4 +12,5 @@ export class Product {
     public isActive: boolean;
     public imageFile: any;
     public description: string;
+    public quantity: number;
 }

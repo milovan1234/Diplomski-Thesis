@@ -5,6 +5,7 @@ import { Category } from '../../models/category';
 import { HostListener } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { ShopCartService } from 'src/app/services/shop-cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +20,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     public userService: UserService, 
     public categoryService: CategoryService,
-    private router: Router) { }
+    private router: Router,
+    public shopCartService: ShopCartService) { }
 
   ngOnInit(): void {
     this.getCategories();

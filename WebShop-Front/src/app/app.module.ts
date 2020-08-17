@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -20,10 +19,10 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuard } from './temp/auth.guard';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
 import { JwtInterceptor } from './temp/jwt.interceptor';
 import { ErrorInterceptor } from './temp/error.interceptor';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -63,7 +62,8 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

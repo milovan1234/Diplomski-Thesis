@@ -54,10 +54,12 @@
 
         <div class="row mt-5" *ngIf="!userService.isLogin || (userService.isLogin && userService.user.role.roleName == 'User')">
             <div class="col-3 col-lg-2 mb-3 mb-sm-0">
-                <input type="number" min="1" max="{{product.stock}}" value="1" class="form-control">
+                <input id="quantity" type="number" min="0" max="{{product.stock}}" [(ngModel)]="quantity" class="form-control">
             </div>
             <div class="col-9 col-md-7 col-lg-5">
-                <button type="button" class="btn bg-logo text-light btn-block py-2">Dodaj u korpu <i class="fas fa-shopping-cart"></i></button>
+                <button type="button" (click)='addProductToShopCart(product)' class="btn bg-logo text-light btn-block py-2">
+                    Dodaj u korpu <i class="fas fa-shopping-cart"></i>
+                </button>
             </div>
         </div>
     </div>
