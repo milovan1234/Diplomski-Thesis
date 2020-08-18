@@ -36,7 +36,7 @@
 
     </div>
 
-    <div class="row mt-2" *ngIf='products && products.length > 0 '>
+    <div class="row mt-2 p-2" *ngIf='products && products.length > 0 '>
         <div class="offset-sm-6 offset-md-8 col-sm-6 col-md-4 p-3">
 
             <div class="row my-2">
@@ -64,13 +64,55 @@
                 <div class="col-6 text-right font-weight-bold text-logo">
                     {{(sumWithoutDiscount-sumDiscount) | currency:'RSD '}}
                 </div>
-            </div> 
+            </div>            
 
         </div>
     </div>
 
     <div *ngIf='products && products.length > 0 && userService.isLogin'>
         <h4 class="mb-3 mt-4" >Dodatni podaci za obavanje kupovine</h4>
+
+        <div class="row">
+            <div class="col-md-6">
+                
+                <form class="mt-3" [formGroup]="checkoutForm" (ngSubmit)="checkoutSubmit()">
+
+                    <div class="form-group my-2">
+                        <label for="cit"><small>Grad <span class="text-red">*</span></small></label>
+                        <input type="text" formControlName="city" class="form-control" id="cit">
+                        <small *ngIf="checkoutForm.get('city').hasError('pattern') 
+                            && checkoutForm.get('city').touched" class="form-text text-red">
+                            Grad nije pravilno unesen.
+                        </small>
+                    </div>
+        
+                    <div class="form-group my-2">
+                        <label for="stre"><small>Ulica <span class="text-red">*</span></small></label>
+                        <input type="text" formControlName="street" class="form-control" id="stre">
+                        <small *ngIf="checkoutForm.get('street').hasError('pattern') 
+                            && checkoutForm.get('street').touched" class="form-text text-red">
+                            Ulica nije pravilno unesena.
+                        </small>
+                    </div>
+        
+                    <div class="form-group my-2">
+                        <label for="hn"><small>Broj stana <span class="text-red">*</span></small></label>
+                        <input type="text" formControlName="houseNumber" placeholder="xx/xx" class="form-control" id="hn">
+                        <small *ngIf="checkoutForm.get('houseNumber').hasError('pattern') 
+                            && checkoutForm.get('houseNumber').touched" class="form-text text-red">
+                            Broj stana nije pravilno unesen.
+                        </small>
+                    </div>
+                    
+                    <button type="submit" [disabled]="!checkoutForm.valid" class="btn bg-logo text-light my-3">
+                        Završi kupovinu
+                    </button>
+
+                </form>
+
+            </div>
+        </div>        
+
     </div>
     
 

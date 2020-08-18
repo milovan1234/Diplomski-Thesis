@@ -29,4 +29,8 @@ export class ShopCartService {
     this.cookieService.set('cartProducts', JSON.stringify(this.products));
   }
 
+  deleteCart() : void {
+    this.cookieService.delete('cartProducts');
+  }
+
 }
