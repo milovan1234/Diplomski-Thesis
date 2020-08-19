@@ -19,11 +19,16 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addProductToShopCart(product: Product) : void {
-    let productForStore = {
-      "productId": product.id,
-      "quantity": this.quantity
-    };
-    this.shopCartService.storeProduct(productForStore);
+    if(product.stock > 0){
+      let productForStore = {
+        "productId": product.id,
+        "quantity": this.quantity
+      };
+      this.shopCartService.storeProduct(productForStore);
+    }
+    else {
+      alert("Izabrani prozivod trenutno nije na stanju!");
+    }
   }
 
 }

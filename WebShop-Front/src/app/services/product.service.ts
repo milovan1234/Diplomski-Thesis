@@ -13,7 +13,12 @@ export class ProductService {
   public getProductsForSubCategory(subCategoryId: number) : Observable<Product[]> {
     return this.http.get<Product[]>(`http://localhost:56123/api/subcategories/${subCategoryId}/products`);
   }
+
   public getProduct(productId: number): Observable<Product> {
     return this.http.get<Product>(`http://localhost:56123/api/products/${productId}`);
+  }
+
+  public getAllProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`http://localhost:56123/api/products`);
   }
 }

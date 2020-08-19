@@ -1,15 +1,66 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product';
+import { ProductService } from 'src/app/services/product.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { CategoryService } from 'src/app/services/category.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit {
 
-  constructor() { }
+
+export class HomePageComponent implements OnInit {
+  public products: Product[];
+  public categoryName: string = "računarske komponente";
+  public subCategoryName: string = "hard diskovi";
+
+  constructor(private productService: ProductService,
+              private sanitizer: DomSanitizer,
+              private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    this.productService.getAllProducts().subscribe({
+      next: products => {
+        products.forEach(x => {
+          x.priceWithDiscount = (x.discount > 0) ? (x.price - Math.round(x.price * (x.discount / 100))) : x.price;
+          x.imageFile = this.sanitizer.bypassSecurityTrustUrl('data:image/*;base64,' + x.imageFile);
+
+          this.categoryService.getCategories().subscribe({
+            next: data => {
+              x.category = data.find(y => y.id == x.subCategory.categoryId);
+            }
+          });
+        });
+
+        this.products = products.sort((a,b) => b.countSold - a.countSold).slice(0, 8);
+        this.onChangeSlide();
+      }
+    });
+  }
+
+  onChangeSlide() : void {
+    $('#carousel-best-sold').on('slide.bs.carousel', function (e) {
+      var $e = $(e.relatedTarget);
+      var idx = $e.index();
+      var itemsPerSlide = 5;
+      var totalItems = $('.carousel-item').length;
+
+      if (idx >= totalItems - (itemsPerSlide - 1)) {
+        var it = itemsPerSlide - (totalItems - idx);
+        for (var i = 0; i < it; i++) {
+          if (e.direction == "left") {
+            $('.carousel-item').eq(i).appendTo('.carousel-inner');
+          }
+          else {
+            $('.carousel-item').eq(0).appendTo('.carousel-inner');
+          }
+        }
+      }
+    });
   }
 
 }

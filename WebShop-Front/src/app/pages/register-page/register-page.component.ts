@@ -17,9 +17,9 @@ export class RegisterPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userRegisterForm = new FormGroup({
-      firstName: new FormControl('', [Validators.pattern("^(?=\.{1,40}$)[a-zčćšđžA-ZČĆŠĐŽ]+(?:[-'\s][a-zčćšđžA-ZČĆŠĐŽ]+)*$"),
+      firstName: new FormControl('', [Validators.pattern("^(?=\.{1,40}$)[a-zčćšđžA-ZČĆŠĐŽ]+(?:[-'\\s][a-zčćšđžA-ZČĆŠĐŽ]+)*$"),
                                       Validators.required]),
-      lastName: new FormControl('', [Validators.pattern("^(?=\.{1,40}$)[a-zčćšđžA-ZČĆŠĐŽ]+(?:[-'\s][a-zčćšđžA-ZČĆŠĐŽ]+)*$"),
+      lastName: new FormControl('', [Validators.pattern("^(?=\.{1,40}$)[a-zčćšđžA-ZČĆŠĐŽ]+(?:[-'\\s][a-zčćšđžA-ZČĆŠĐŽ]+)*$"),
                                      Validators.required]),
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [Validators.pattern('^(?=\.*[a-z])(?=\.*[A-Z])(?=\.*\\d)\.{8,15}$'),

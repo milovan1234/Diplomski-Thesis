@@ -100,7 +100,12 @@ export class ProductsPageComponent implements OnInit {
   getProducers(): void {
     this.producerService.getProducersForSubCategory(this.subCategoryId).subscribe({
       next: producers => {
-        this.producers = producers;
+        this.producers = [] as Producer[];
+        for (let producer of producers) {
+          if(this.producers.find(x => x.id == producer.id) == null) {
+            this.producers.push(producer);
+          }
+        }
         this.producers.forEach(x => {
           x.isCheck = this.selectProducers.find(y => y == x.producerName) != null ? true : false;
         });

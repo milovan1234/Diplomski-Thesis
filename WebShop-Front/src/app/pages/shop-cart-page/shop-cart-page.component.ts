@@ -29,9 +29,9 @@ export class ShopCartPageComponent implements OnInit {
   ngOnInit(): void {
 
     this.checkoutForm = new FormGroup({
-      city: new FormControl('', [Validators.pattern("^[a-zčćšđžA-ZČĆŠĐŽ]+(?:[\s-][a-zčćšđžA-ZČĆŠĐŽ]+)*$"),
+      city: new FormControl('', [Validators.pattern("^[a-zčćšđžA-ZČĆŠĐŽ]+(?:[\\s-][a-zčćšđžA-ZČĆŠĐŽ]+)*$"),
       Validators.required]),
-      street: new FormControl('', [Validators.pattern("^[a-zčćšđžA-ZČĆŠĐŽ]+(?:[\s-][a-zčćšđžA-ZČĆŠĐŽ]+)*$"),
+      street: new FormControl('', [Validators.pattern("^[a-zčćšđžA-ZČĆŠĐŽ]+(?:[\\s-][a-zčćšđžA-ZČĆŠĐŽ]+)*$"),
       Validators.required]),
       houseNumber: new FormControl('', [Validators.pattern("^[0-9a-zA-Z]+(?:[/][0-9a-zA-Z]+)*$"), Validators.required])
     });
