@@ -14,7 +14,8 @@ declare var $: any;
 
 
 export class HomePageComponent implements OnInit {
-  public products: Product[];
+  public productsBestSold: Product[];
+  public productsRecommeded: Product[];
   public categoryName: string = "računarske komponente";
   public subCategoryName: string = "hard diskovi";
 
@@ -36,31 +37,36 @@ export class HomePageComponent implements OnInit {
           });
         });
 
-        this.products = products.sort((a,b) => b.countSold - a.countSold).slice(0, 8);
-        this.onChangeSlide();
+        this.productsBestSold = products.sort((a,b) => b.countSold - a.countSold).slice(0, 8);
+        this.productsRecommeded = products.sort((a,b) => b.discount - a.discount).slice(0, 8);
+
+        this.onChangeSlide('#carousel-best-sold');
+        this.onChangeSlide('#carousel-recommended');
+
       }
     });
   }
 
-  onChangeSlide() : void {
-    $('#carousel-best-sold').on('slide.bs.carousel', function (e) {
+  onChangeSlide(carouselId: string) : void {    
+    $(carouselId).on('slide.bs.carousel', function (e) {
       var $e = $(e.relatedTarget);
       var idx = $e.index();
       var itemsPerSlide = 5;
-      var totalItems = $('.carousel-item').length;
+      var totalItems = $(carouselId + ' .carousel-item').length;
 
       if (idx >= totalItems - (itemsPerSlide - 1)) {
         var it = itemsPerSlide - (totalItems - idx);
         for (var i = 0; i < it; i++) {
           if (e.direction == "left") {
-            $('.carousel-item').eq(i).appendTo('.carousel-inner');
+            $(carouselId + ' .carousel-item').eq(i).appendTo(carouselId + ' .carousel-inner');
           }
           else {
-            $('.carousel-item').eq(0).appendTo('.carousel-inner');
+            $(carouselId + ' .carousel-item').eq(0).appendTo(carouselId + ' .carousel-inner');
           }
         }
       }
     });
   }
+
 
 }

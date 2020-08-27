@@ -41,7 +41,7 @@ namespace WebShop_Back.Services
             List<Producer> producers = new List<Producer>();
             _context.Products.Include(x => x.Producer).ToList().ForEach(x =>
             {
-                if(x.SubCategoryId == subCategoryId)
+                if(x.SubCategoryId == subCategoryId && x.IsActive)
                 {
                     producers.Add(x.Producer);
                 }
