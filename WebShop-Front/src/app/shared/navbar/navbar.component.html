@@ -6,9 +6,9 @@
         </div>
         <div class="col-sm-6 text-center align-self-center py-3">
             <div class="input-group px-5">
-                <input type="search" class="form-control" placeholder="Pretraga">
+                <input type="search" class="form-control" [(ngModel)]="searchInput" placeholder="Pretraga">
                 <div class="input-group-append">
-                    <button class="btn text-light bg-logo" type="button">
+                    <button class="btn text-light bg-logo" (click)='onSearchClick()' type="button">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>

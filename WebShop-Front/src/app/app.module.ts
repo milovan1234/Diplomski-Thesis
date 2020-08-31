@@ -26,6 +26,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { CookieService } from 'ngx-cookie-service';
 import { ShopCartPageComponent } from './pages/shop-cart-page/shop-cart-page.component';
 import { CartProductComponent } from './pages/shop-cart-page/cart-product/cart-product.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CartProductComponent } from './pages/shop-cart-page/cart-product/cart-p
     LoginPageComponent,
     RegisterPageComponent,
     ShopCartPageComponent,
-    CartProductComponent
+    CartProductComponent,
+    SearchPageComponent
   ],
   imports: [
     FormsModule,
@@ -54,6 +56,7 @@ import { CartProductComponent } from './pages/shop-cart-page/cart-product/cart-p
     AppRoutingModule,
     RouterModule.forRoot([
       { path: 'home', component: HomePageComponent },
+      { path: 'search', component: SearchPageComponent },
       { path: 'error', component: ErrorPageComponent, pathMatch: 'full' },
       { path: 'login', component: LoginPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'cart', component: ShopCartPageComponent, pathMatch: 'full' , canActivate: [UserGuard]},

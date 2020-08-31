@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="my-3">
+        <small class="text-secondary">
+            <a [routerLink]="['/home']" class="pr-3 text-secondary text-decoration-none">Početna</a>
+
+            <i class="fas fa-caret-right"></i>
+
+            <a [routerLink]="['/search']" [queryParams]="{value : searchValue}"
+                class="font-weight-bold px-3 text-logo text-decoration-none">
+                Rezultat pretrage za '{{searchValue}}'
+            </a>
+        </small>
+    </div>
+
+    <div class="spinner-border text-red" *ngIf="!searchProducts" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+
+    <h4 class="font-weight-bold my-4">Rezultat pretrage za '{{searchValue}}'</h4>
+
+    <div class="row">
+        <div class="alert alert-info w-100 mx-3" *ngIf="searchProducts && searchProducts.length == 0">
+            Nema pronađenih proizvoda za traženu pretragu.
+        </div>
+
+        <app-product class="col-sm-6 col-md-4 col-lg-3 mb-3" *ngFor="let product of searchProducts" 
+            [categoryName]="product.category.categoryName" [product]="product" [subCategoryName]="product.subCategory.subCategoryName">
+        </app-product>
+
+    </div>
+
+</div>

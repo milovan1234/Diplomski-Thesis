@@ -13,12 +13,12 @@ import { ShopCartService } from 'src/app/services/shop-cart.service';
   styleUrls: ['./navbar.component.css']
 })
 
-
-
 export class NavbarComponent implements OnInit {
-  public categories : Category[];
+  public categories: Category[];
+  public searchInput: string = '';
+
   constructor(
-    public userService: UserService, 
+    public userService: UserService,
     public categoryService: CategoryService,
     private router: Router,
     public shopCartService: ShopCartService) { }
@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
     this.getCategories();
   }
 
-  public getCategories() : void {
+  public getCategories(): void {
     this.categoryService.getCategories().subscribe({
       next: categories => {
         this.categories = categories;
@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  onClickLogo() : void {
+  onClickLogo(): void {
     this.router.navigate(['/home']);
   }
 
@@ -56,8 +56,15 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  onClickCart() : void {
+  onClickCart(): void {
     this.router.navigate(['/cart']);
   }
-  
+
+  onSearchClick(): void {
+    if (this.searchInput != '') {
+      this.router.navigate(['/search'], { queryParams: { value: this.searchInput } });
+      this.searchInput = '';
+    }
+  }
+
 }

@@ -5,7 +5,7 @@
         <div class="carousel-inner row w-100 mx-auto" role="listbox">
             <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let product of productsBestSold;index as i"
                 [ngClass]="{'active': i === 0}">
-                <app-product [categoryName]="categoryName" [product]="product" [subCategoryName]="product.subCategory.subCategoryName">
+                <app-product [categoryName]="product.category.categoryName" [product]="product" [subCategoryName]="product.subCategory.subCategoryName">
                </app-product>
             </div>
         </div>
@@ -20,11 +20,13 @@
     </div>   
         
     <h4 class="my-4 text-dark text-center">Preporučeno za vas</h4>
-    <div id="carousel-recommended" class="carousel slide mb-5" data-ride="carousel">
+    <div id="carousel-recommended" class="carousel slide mb-5" data-ride="carousel">        
         <div class="carousel-inner row w-100 mx-auto" role="listbox">
             <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let product of productsRecommeded;index as i"
                 [ngClass]="{'active': i === 0}">
-                <app-product [categoryName]="categoryName" [product]="product" [subCategoryName]="product.subCategory.subCategoryName">
+                <span>
+                </span>
+                <app-product [categoryName]="product.category.categoryName" [product]="product" [subCategoryName]="product.subCategory.subCategoryName">
                </app-product>
             </div>
         </div>
